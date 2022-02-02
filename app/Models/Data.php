@@ -24,10 +24,10 @@ class Data extends Model
     }
     public function getCreatedAtAttribute($value){
         $date = Carbon::parse($value);
-        return $date->format('d-m-Y H:i:s');
+        return $date->format('d-m-Y H:i');
     }
     public function getUpdatedAtAttribute($value){
         $date = Carbon::parse($value);
-        return $date->format('d-m-Y H:i:s');
+        return $date->format('d-m-Y H:i');
     }
 }

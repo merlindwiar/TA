@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 // use App\Models\Kekeruhan;
-use Carbon\Factory as CarbonFactory;
-use Faker\Factory;
+// use Carbon\Factory as CarbonFactory;
+// use Faker\Factory;
 use Illuminate\Database\Seeder;
 
 class KekeruhanTableSeeder extends Seeder
@@ -36,6 +36,6 @@ class KekeruhanTableSeeder extends Seeder
         // ];
 
         // \DB::table('kekeruhan')->insert($kekeruhan);
-            \App\Models\Kekeruhan::factory()->count(50)->create();
+            // \App\Models\Kekeruhan::factory()->count(50)->create();
     }
 }

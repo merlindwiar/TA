@@ -1,7 +1,8 @@
 <?php
 
 namespace Database\Seeders;
-
+use Carbon\Factory as CarbonFactory;
+use Faker\Factory;
 use Illuminate\Database\Seeder;
 
 class UsersTableSeeder extends Seeder
@@ -15,30 +16,26 @@ class UsersTableSeeder extends Seeder
     {
         $users = [
             [
-                'id_user'=>'1',
-                'nama_lengkap' => 'user1',
-                'username' => 'user1',
-                'telepon' => '123456789',
-                'email' => 'user1@mail.com',
+                'id'=>'1',
+                'name' => 'Petugas',
+                'level' => 'user',
+                'email' => 'petugas@gmail.com',
                 'email_verified_at' => new \DateTime,
-                'password' => bcrypt('12345678'),
+                'password' => bcrypt('petugas'),
                 'remember_token' => 'abcdefgh',
                 'created_at' => new \DateTime,
                 'updated_at' => null,
-                'id_role' => '1',
             ],
             [
-                'id_user'=>'2',
-                'nama_lengkap' => 'user2',
-                'username' => 'user2',
-                'telepon' => '123456789',
-                'email' => 'user2@mail.com',
+                'id'=>'2',
+                'name' => 'Admin',
+                'level' => 'admin',
+                'email' => 'admin@gmail.com',
                 'email_verified_at' => new \DateTime,
-                'password' => bcrypt('12345678'),
+                'password' => bcrypt('admin'),
                 'remember_token' => 'abcdefgh',
                 'created_at' => new \DateTime,
                 'updated_at' => null,
-                'id_role' => '2',
             ],
 
         ];

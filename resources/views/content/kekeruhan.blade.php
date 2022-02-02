@@ -2,12 +2,15 @@
 @section('title','Kondisi Air')
 @section('halaman','Pantau Kondisi Air Sungai')
 @section('content')
-
-<div class="col-sm-3 ">
-    <a href="{{url('rekap-keruh')}}">
-    <button type="button" class="btn btn-block btn-primary">Data Rekapitulasi Kekeruhan</button>
-    </a>
-  </div><br>
+<div class="content">
+    <div class="row">
+        <div class="col-sm-3 ">
+            <a href="{{url('cetak-data-kekeruhan-form')}}">
+            <button type="button" class="btn btn-block btn-primary">Data Rekapitulasi Kekeruhan</button>
+            </a>
+          </div>
+    </div>
+<br>
 
 {{-- <div class="card">
     <div class="panel">
@@ -75,7 +78,10 @@
 <script src="{{asset('public/template/plugins/datatables-buttons/js/buttons.print.min.js')}}"></script>
 <script src="{{asset('public/template/plugins/datatables-buttons/js/buttons.colVis.min.js')}}"></script>
 <script src="https://code.highcharts.com/highcharts.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+{{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script> --}}
+
+<script src="{{ asset('public/chart.js/chart.js') }}"></script>
+<script src="{{ asset('public/chart.js/chartjs-plugin-annotation.js') }}"></script>
 
 <script>
     var ctx = document.getElementById("myChart");
@@ -93,14 +99,31 @@
         }]
       },
       options: {
-        scales: {
-          xAxes: [],
-          yAxes: [{
-            ticks: {
-              beginAtZero:true
+        plugins: {
+          autocolors: false,
+          annotation: {
+            annotations: {
+                box1: {
+                    type: 'box',
+                    yMin: 0,
+                    yMax: 24,
+                    backgroundColor: 'rgba(255, 255, 102, 0.25)'
+                  },
+                  box2: {
+                    type: 'box',
+                    yMin: 25,
+                    yMax: 400,
+                    backgroundColor: 'rgba(153, 255, 153, 0.25)'
+                  },
+                  box3: {
+                    type: 'box',
+                    yMin: 401,
+                    yMax: 1000,
+                    backgroundColor: 'rgba(255, 0, 0, 0.4)'
+                  }
             }
-          }]
-        }
+          }
+        },
       }
     });
     var updateChart = function() {

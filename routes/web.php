@@ -7,6 +7,7 @@ use App\Http\Controllers\AlatController;
 use App\Models\Status_kekeruhan;
 use App\Models\Kekeruhan;
 use App\Http\Controllers\LoginController; // step 1
+use App\Http\Controllers\DashboardController;
 
 
 
@@ -20,9 +21,9 @@ use App\Http\Controllers\LoginController; // step 1
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', function () {
-    return view('welcome');
-    });
+// Route::get('/', function () {
+//     return view('welcome');
+//     });
 
     // Route::post('/login', function () {
     //     return view('Pengguna.Login');
@@ -33,6 +34,12 @@ Route::get('/', function () {
 
     Route::get('/firebase','FirebaseController@index');
     Route::get('/firebase-store','FirebaseController@store');
+    Route::get('/send', [EventController::class, 'index']);
+    Route::get('/test', function () {
+        event(new App\Events\Kekeruhan('Someone'));
+        return "Event has been sent!";
+    });
+
 
 
 Route::middleware(['auth','ceklevel:admin'])->group(function () {
@@ -47,10 +54,24 @@ Route::middleware(['auth','ceklevel:admin'])->group(function () {
 Route::middleware(['auth','ceklevel:admin,user'])->group(function () {
     Route::get('/dashboard', 'DashboardController@dataTerakhir')->name('dashboard');
     Route::get('/keasaman-air','PhController@index')->name('keasaman-air');
-    Route::get('/rekap-asam','RekapAsamController@index')->name('rekap-asam');
-    Route::post('/filter-asam','RekapAsamController@index')->name('filter-asam');
+    // Route::get('/rekap-asam','RekapAsamController@index')->name('rekap-asam');
+    // Route::get('data/records', 'RekapAsamController@records')->name('data-records');
+    // Route::post('/filter-asam','RekapAsamController@index')->name('filter-asam');
     Route::get('/kekeruhan-air','KekeruhanController@index')->name('kekeruhan-air');
-    Route::get('/rekap-keruh','RekapKeruhController@index')->name('rekap-keruh');
+    // Route::get('/rekap-keruh','RekapKeruhController@index')->name('rekap-keruh');
+    Route::get('/cetak-data-keasaman-form','RekapAsamController@cetakform')->name('cetak-data-keasaman-form');
+    // Route::get('/cetak-data-pertanggal/{tglawal}/{tglakhir}','RekapAsamController@cetakDataPertanggal')->name('cetak-data-pertanggal');
+    Route::get('/cetak-data-kekeruhan-form','RekapKeruhController@cetakform')->name('cetak-data-kekeruhan-form');
+    // Route::get('/cetak-data-pertanggal/{tglawal}/{tglakhir}','RekapKeruhController@cetakDataPertanggal')->name('cetak-data-pertanggal');
+    Route::post('/cetak-data-keasaman-pertanggal','RekapAsamController@cetakDataPertanggal')->name('cetak-data-keasaman-pertanggal');
+    Route::post('/cetak-data-kekeruhan-pertanggal','RekapKeruhController@cetakDataPertanggal')->name('cetak-data-kekruhan-pertanggal');
+
+    Route::post('/save-token', [DashboardController::class, 'saveToken'])->name('save-token');
+    Route::post('/send-notification', [DashboardController::class, 'sendNotification'])->name('send.notification');
+
+    // Route::post('/cetak-data-pertanggal2/{tglawal}/{tglakhir}','RekapAsamController@cetakDataPertanggal2')->name('cetak-data-pertanggal2');
+
+
     // Route::get('/rekap-keruh','RekapKeruhController@index')->name('rekap-keruh');
     // Route::get('/rekap-keruh','RekapKeruhController@searc')->name('search');
 });
@@ -110,6 +131,5 @@ Route::get('/users/{id_user}', function ($id_user) {
 // Route::get('/tes_status_keruh', 'StatusKeruhController@index');
 
 
-Route::get('/tes', function () {
-    return view('layout.ujimaster');
-    });
+// Route::get('tes', 'RekapAsamController@index')->name('tes');
+

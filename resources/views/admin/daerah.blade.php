@@ -49,8 +49,19 @@
                                 <td>
                                     <a href="{{url('edit-titik',$item->id)}}"><i class="fas fa-edit"></i></a>
                                     |
-                                    <a href="#"><i class="fas fa-trash-alt delete" data-id="{{$item->id}}" data-nama="{{$item->nama_alat}}"style="color: red"></i></a>
-                                </td>
+                                    {{-- <a href="#"><i class="fas fa-trash-alt delete" data-id="{{$item->id}}" data-nama="{{$item->nama_alat}}"style="color: red"></i></a> --}}
+                                    <a href="{{route('delete-titik',[$item->id])}}" onclick="return confirm('Apakah anda yakin akan menghapus data alat {{$item->nama_alat}}?');"><i class="fas fa-trash-alt delete" style="color: red"></i></a>
+                                {{-- <form action="{{url('delete-titik',$item->id)}}"  method="POST">
+
+                                    @csrf
+                                    @method('delete')
+                                    <button type="submit"onclick="return confirm('Apakah anda yakin akan menghapus data alat {{$item->nama_alat}}?');"><i class="fas fa-trash-alt delete" style="color: red"></i></button></form> --}}
+                                    {{-- <form action="{{url('delete-titik',$item->id)}}"  method="POST">
+
+                                        @csrf
+                                        @method('delete')
+                                        <button ><i class="fas fa-trash-alt delete" style="color: red"></i></button></form> --}}
+                                    </td>
                               </tr>
                               @endforeach
 
@@ -120,7 +131,7 @@
 </script>
 
 </body>
-<script>
+{{-- <script>
     // memanggil kelas dengan jquery
     $('.delete').click(function(){
         var alatid = $(this).attr('data-id');
@@ -134,7 +145,7 @@
         })
         .then((willDelete) => {
         if (willDelete) {
-            window.location="{{url('delete-titik',$item->id)}}"
+            window.location="{{url('delete-titik',"+alatid+")}}"
             swal("Data alat berhasil dihapus", {
             icon: "success",
             });
@@ -144,6 +155,6 @@
     });
     });
 
-</script>
+</script> --}}
 </html>
 @endsection

@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 // use App\Models\Kekeruhan;
 // use App\Models\RataDataKeruh;
 use App\Models\Data;
+use App\Models\Grafik;
+
 
 class SensorController extends Controller
 {
@@ -43,6 +45,14 @@ class SensorController extends Controller
             'status_kekeruhan' => $hasilNTU,
             'status_ph' => $hasilPH,
         ]);
+        $grafik = Grafik::create([
+
+            'NTU' => $request->input('NTU'),
+            'kadar_ph' => $request->input('kadar_ph'),
+            'status_kekeruhan' => $hasilNTU,
+            'status_ph' => $hasilPH,
+        ]);
+        notify()->success('Berhasil kirim data');
 
         if ($data) {
             return response()->json([
@@ -50,6 +60,8 @@ class SensorController extends Controller
                 'message' => 'Post Berhasil Disimpan!',
                 'data' => $data,
             ], 200);
+            redirect()->route('keasaman-air');
+            redirect()->route('kekeruhan-air');
         } else {
             return response()->json([
                 'success' => false,
@@ -98,4 +110,5 @@ class SensorController extends Controller
 
 
     // }
+
 }

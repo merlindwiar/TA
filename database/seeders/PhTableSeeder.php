@@ -13,6 +13,6 @@ class PhTableSeeder extends Seeder
      */
     public function run()
     {
-        \App\Models\Ph::factory()->count(50)->create();
+        // \App\Models\Ph::factory()->count(50)->create();
     }
 }
